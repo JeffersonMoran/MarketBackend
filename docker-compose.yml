@@ -1,0 +1,44 @@
+version: '3'
+
+services:
+  nodejs:
+    build: .
+    container_name: backend
+    restart: always
+    env_file: .env
+    environment:
+      - MONGO_USERNAME=$MONGO_USERNAME
+      - MONGO_PASSWORD=$MONGO_PASSWORD
+      - MONGO_HOSTNAME=db
+      - MONGO_PORT=$MONGO_PORT
+      - MONGO_DB=$MONGO_DB
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+    volumes:
+      - .:/usr/app
+    networks:
+      - mongo-compose-network
+    command: npm start
+    
+  db:
+    image: mongo:4.1.8-xenial
+    container_name: db
+    restart: always
+    env_file: .env
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=$MONGO_USERNAME
+      - MONGO_INITDB_ROOT_PASSWORD=$MONGO_PASSWORD
+    volumes:  
+      - dbdata:/data/db   
+    networks:
+      - mongo-compose-network
+      
+networks: 
+    mongo-compose-network:
+      driver: bridge
+
+volumes:
+  dbdata:
+  node_modules:  
