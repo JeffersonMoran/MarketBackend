@@ -22,9 +22,9 @@ app.use((req, res, next) => {
   next();
 })
 
-app.use('/user', require('./routes/user'))
-app.use('/market', require('./routes/market'))
-app.use('/product', require('./routes/product'))
+app.use('/user', require('./src/routes/user'))
+app.use('/market', require('./src/routes/market'))
+app.use('/product', require('./src/routes/product'))
 
 app.get('/', (req, res) => {
   res.send('Hello World aaa');
