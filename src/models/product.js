@@ -12,4 +12,12 @@ const ProductSchema = new mongoose.Schema({
     timestamps: true
 });
 
+ProductSchema.methods.validate = async ({ name, image, price, market }) => {
+    if (name === '', image === '', price <= 0, market === '') {
+        throw Error("Porfavor insira corretamente as informaçoes.");
+    }
+
+    return true;
+};
+
 module.exports = mongoose.model('Product', ProductSchema);

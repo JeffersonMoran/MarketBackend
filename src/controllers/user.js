@@ -35,6 +35,18 @@ exports.login = async (req, res) => {
     }
 }
 
+exports.delete = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const deletedUser = await User.findOneAndDelete({ _id: id})
+
+        res.json({ success: true });
+    } catch (error) {
+        const { message } = error;
+        res.status(500).send({ message });
+    }
+}
+
 returnInfos = async (user) => {
     const { email, name, image, buy_list } = user;
     return {
