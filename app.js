@@ -1,15 +1,31 @@
 'use strict';
 
 const express = require('express');
+const consign = require("consign");
 const bodyParser = require('body-parser');
+const logger = require('morgan');
+const cors = require("cors");
+const helmet = require('helmet')
+const mongoose = require('mongoose');
+
+require('dotenv').config();
 
 // Constants
 const PORT = process.env.PORT || 3000;
-const HOST = '0.0.0.0';
+const HOST = 'localhost';
 
 // App
 let app = express();
-require('./db')(app);
+
+mongoose.connect('mongodb://localhost/MARKET', { useNewUrlParser: true , useUnifiedTopology: true });
+const db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+
+app.db = db
+
+app.use(helmet());
+app.use(logger('dev'));
+app.use(cors());
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -22,18 +38,13 @@ app.use((req, res, next) => {
   next();
 })
 
-app.use('/user', require('./src/routes/user'))
-app.use('/market', require('./src/routes/market'))
-app.use('/product', require('./src/routes/product'))
+consign()
+  .then("./models")
+  .then("./services")
+  .then("./controllers")
+  .then("./routes")
+  .into(app);
 
-app.get('/', (req, res) => {
-  res.send('Hello World aaa');
+app.listen(PORT, () => {
+  console.log(`Running on http://${HOST}:${PORT}`);
 });
-
-app.get('/test', (req, res) => {
-  console.log('teesaaste');
-  res.send('Hello Worssldss');
-});
-
-app.listen(PORT, HOST);
-console.log(`Running on http://${HOST}:${PORT}`);
