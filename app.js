@@ -12,12 +12,13 @@ require('dotenv').config();
 
 // Constants
 const PORT = process.env.PORT || 3000;
+
 const HOST = 'localhost';
 
 // App
 let app = express();
 
-mongoose.connect('mongodb://localhost/MARKET', { useNewUrlParser: true , useUnifiedTopology: true });
+mongoose.connect('mongodb://localhost/MARKET', { useNewUrlParser: true, useUnifiedTopology: true });
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 
@@ -40,6 +41,7 @@ app.use((req, res, next) => {
 
 consign()
   .then("./models")
+  .then("./utils")
   .then("./services")
   .then("./controllers")
   .then("./routes")
@@ -47,4 +49,5 @@ consign()
 
 app.listen(PORT, () => {
   console.log(`Running on http://${HOST}:${PORT}`);
+  //app.utils.dbPopulate.generateData();
 });

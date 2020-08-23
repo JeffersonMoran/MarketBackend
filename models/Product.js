@@ -3,12 +3,11 @@ const mongoose = require('mongoose');
 
 module.exports = (app) => {
     const ProductSchema = new mongoose.Schema({
-        name: { type: String, default: "" },
-        image: { type: String, default: "" },
-        price: { type: Number, default: 0 },
-        description: { type: String, default: "" },
-        isPromotional: { type: Boolean, default: false },
-        bar_code: { type: String, default: "" },
+        nome: { type: String, default: "" },
+        imagem: { type: String, default: "" },
+        preco: { type: Number, default: 0 },
+        descricao: { type: String, default: "" },
+        promocao: { type: Boolean, default: false },
         market: { type: mongoose.Schema.Types.ObjectId, ref: 'Market' }
     }, {
             timestamps: true
