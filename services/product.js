@@ -1,5 +1,5 @@
 module.exports = app => {
-    const { Product,  } = app.models;
+    const { Product } = app.models;
 
     const listProducts = async (where = {}) => {
         return await Product.find(where);
