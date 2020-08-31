@@ -1,8 +1,10 @@
 module.exports = (app) => {
     const { User } = app.models;
+    const { email_regex } = app.utils.regex;
 
     const signUp = async (new_user) => {
         try {
+            if(!email_regex(new_user.email)) throw new Error('Need a valid email.');
             await findOneByEmail(new_user.email);
 
             const user = new User(new_user);
@@ -18,6 +20,7 @@ module.exports = (app) => {
     
     const login = async ({ email, player_id, password }) => {
         try {
+            if(!email_regex(email)) throw new Error('Need a valid email.');
             const user = await User.findOne({ email });
             if (user) {
                 const valid = await user.comparePassword(password.trim(), user.password);

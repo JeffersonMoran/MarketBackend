@@ -42,5 +42,5 @@ module.exports = (app) => {
         return bcrypt.compareSync(password, userPassword);
     };
 
-    return mongoose.model('User', UserSchema, "User")
+    return mongoose.model('User', UserSchema)
 }
