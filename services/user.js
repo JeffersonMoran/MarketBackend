@@ -9,7 +9,8 @@ module.exports = (app) => {
 
             const userSaved = await user.save();
             const tokens = await user.makeJWT(userSaved);
-            return  { ...userSaved.toObject(), ...tokens }
+            const returnUser = await returnInfos(userSaved);
+            return  { ...returnUser, ...tokens }
         } catch (error) {
             throw error;
         }
