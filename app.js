@@ -44,6 +44,7 @@ consign()
   .then("./utils")
   .then("./services")
   .then("./controllers")
+  .then("./middlewares")
   .then("./routes")
   .into(app);
 

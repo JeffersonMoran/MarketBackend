@@ -2,6 +2,7 @@ module.exports = app => {
     const { Product } = app.models;
 
     const listProducts = async (where = {}) => {
+        console.log(where);
         return await Product.find(where);
     }
 

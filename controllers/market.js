@@ -1,5 +1,5 @@
 module.exports = app => {
-    const { listMarkets, findMarket } = app.services.market;
+    const { listMarkets, findMarket, addProduct } = app.services.market;
     const { listProducts } = app.services.product;
 
     const markets = async (req, res) => {
@@ -30,5 +30,21 @@ module.exports = app => {
         }
     }
 
-    return { markets, findOneMarket }
+    const createProduct = async (req, res) => {
+        try {
+            const { market_id } = req.params;
+            const { user_id } = req;
+            
+            const product_found = await listProducts({ market: market_id, nome: req.body.nome, descricao: req.body.descricao });
+            if (product_found.length > 0) throw Error('Produto ja cadastrao para esse mercado.');
+            const product = await addProduct({ market_id, created_by: user_id, ...req.body });
+            return res.json(product);
+        } catch (error) {
+            console.log(error);
+            const { message } = error;
+            return res.status(500).send({ message });
+        }
+    }
+
+    return { markets, findOneMarket, createProduct }
 }
