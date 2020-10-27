@@ -6,7 +6,8 @@ module.exports = (app) => {
         latitude: { type: String, default: "" },
         longitude: { type: String, default: "" },
         imagem: { type: String, default: "" },
-        nome: { type: String, default: "" }
+        nome: { type: String, default: "" },
+        verify: { type: Boolean, default: true }
     }, {
             timestamps: true
         });

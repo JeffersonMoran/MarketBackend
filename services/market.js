@@ -1,5 +1,5 @@
 module.exports = app => {
-    const { Market, Rating } = app.models;
+    const { Market, Rating, Product } = app.models;
 
     const listMarkets = async (where = {}) => {
         return await Market.find(where);
@@ -16,5 +16,12 @@ module.exports = app => {
         }
     }
     
-    return { listMarkets, findMarket }
+    const addProduct = async (data) => {
+        const new_product_added = new Product({ ...data });
+        const product_added = await new_product_added.save();
+
+        return product_added;
+    }
+    
+    return { listMarkets, findMarket, addProduct }
 }
