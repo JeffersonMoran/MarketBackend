@@ -13,7 +13,7 @@ require('dotenv').config();
 // Constants
 const PORT = process.env.PORT || 3000;
 
-const HOST = 'localhost';
+const HOST = process.env.HOST;
 
 // App
 let app = express();
@@ -49,5 +49,5 @@ consign()
 
 app.listen(PORT, () => {
   console.log(`Running on http://${HOST}:${PORT}`);
-  //app.utils.dbPopulate.generateData();
+ // app.utils.dbPopulate.generateData();
 });
