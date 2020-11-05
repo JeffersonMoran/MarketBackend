@@ -53,13 +53,13 @@ module.exports = app => {
         ]
 
         const markets = [
-            { nome: 'Supermercado Extra', imagem: 'https://logodownload.org/wp-content/uploads/2014/12/extra-logo-mercado.jpg' },
-            { nome: 'Supermercado Carrefour', imagem: 'https://www.carrefour.com.br/_ui/responsive/theme-carrefour/images/logo_carrefourgif.gif' },
-            { nome: 'Supermercado União', imagem: 'https://lh3.googleusercontent.com/proxy/OAIppg3Up-E_es2pYXvyBScKAEqPqzmgyv4zgS48CGWPpCmvAZsbv9nC52qaFTOrf0XGE28GRmWnQ8BV5cXcJ0RwKTlaR6oSeUkylRJUzvf74YbTbyVXQq7yrtfPdrBUUalCHU0' },
-            { nome: 'Supermercado Dia', imagem: 'https://na001.leafletcdns.com/com.br/data/12/logo.png' },
-            { nome: 'Supermercado Mendonça', imagem: 'https://scontent.fbjp2-1.fna.fbcdn.net/v/t1.0-9/37251602_1776359329109286_4020720856622694400_o.jpg?_nc_cat=102&_nc_sid=09cbfe&_nc_ohc=-RAhyvvzajgAX8tMV5K&_nc_ht=scontent.fbjp2-1.fna&oh=5d3dec2f2b5320a07fa5dc011265f590&oe=5F5FFCE8' },
-            { nome: 'Supermercado Mercadão', imagem: 'https://www.mercadaoatacadista.com.br/wp-content/uploads/2018/05/logomercadao-1.png' },
-            { nome: 'Supermercado Big', imagem: 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTXq9YJaT0gsUwltNdAe_DatL6S87MOoewyTg&usqp=CAU' }
+            { nome: 'Supermercado Extra', imagem: 'https://logodownload.org/wp-content/uploads/2014/12/extra-logo-mercado.jpg', endereco: "Rua José Dominicci, 621 - Cedro, Bragança Paulista - SP, 12926-282" },
+            { nome: 'Supermercado Carrefour', imagem: 'https://www.carrefour.com.br/_ui/responsive/theme-carrefour/images/logo_carrefourgif.gif', endereco: "Av. São Vicente de Paula, 450 - Jardim Recreio, Bragança Paulista - SP, 12910-111" },
+            { nome: 'Supermercado União', imagem: 'https://lh3.googleusercontent.com/proxy/OAIppg3Up-E_es2pYXvyBScKAEqPqzmgyv4zgS48CGWPpCmvAZsbv9nC52qaFTOrf0XGE28GRmWnQ8BV5cXcJ0RwKTlaR6oSeUkylRJUzvf74YbTbyVXQq7yrtfPdrBUUalCHU0', endereco: "Av. São Vicente de Paula, 450 - Jardim Recreio, Bragança Paulista - SP, 12910-110" },
+            { nome: 'Supermercado Dia', imagem: 'https://na001.leafletcdns.com/com.br/data/12/logo.png', endereco: "Av. Saúl Grabler, 444 - Jardim Aguas Claras, Bragança Paulista - SP, 12929-080" },
+            { nome: 'Supermercado Mendonça', imagem: 'https://scontent.fbjp2-1.fna.fbcdn.net/v/t1.0-9/37251602_1776359329109286_4020720856622694400_o.jpg?_nc_cat=102&_nc_sid=09cbfe&_nc_ohc=-RAhyvvzajgAX8tMV5K&_nc_ht=scontent.fbjp2-1.fna&oh=5d3dec2f2b5320a07fa5dc011265f590&oe=5F5FFCE8', endereco: "R. Dr. Freitas, 777 - Matadouro, Bragança Paulista - SP, 12910-340" },
+            { nome: 'Supermercado Mercadão', imagem: 'https://www.mercadaoatacadista.com.br/wp-content/uploads/2018/05/logomercadao-1.png', endereco: "Av. Juscelino K. de Oliveira, 54 - Matadouro, Bragança Paulista - SP, 12910-335" },
+            { nome: 'Supermercado Big', imagem: 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTXq9YJaT0gsUwltNdAe_DatL6S87MOoewyTg&usqp=CAU', endereco: "Av. Fernando Machado de Campos, 269 - Res. Hipica Jaguari, Bragança Paulista - SP, 12926-580" }
         ];
 
         const products = [

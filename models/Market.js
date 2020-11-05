@@ -7,6 +7,7 @@ module.exports = (app) => {
         longitude: { type: String, default: "" },
         imagem: { type: String, default: "" },
         nome: { type: String, default: "" },
+        endereco: { type: String, default: "" },
         verify: { type: Boolean, default: true }
     }, {
             timestamps: true
