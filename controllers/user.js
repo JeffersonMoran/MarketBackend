@@ -96,7 +96,10 @@ module.exports = (app) => {
     const listBuyList = async (req, res) => {
         try {
             const { user_id } = req;
-            const user = await User.findOne({ _id: user_id }).populate('buy_list', '-__v');
+            const user = await User.findOne({ _id: user_id }).populate({
+                path: 'buy_list',
+                populate: { path: 'market' }
+            });
             res.json(user.buy_list)
         } catch (error) {
             console.log(error);
