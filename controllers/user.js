@@ -1,6 +1,8 @@
 
 module.exports = (app) => {
     const { user, listProducts } = app.services;
+    const { User } = app.models;
+
     const register = async (req, res) => {
         try {
             const { name, image, password, email, player_id } = req.body;
@@ -54,5 +56,57 @@ module.exports = (app) => {
         }
     }
 
-    return { register, signIn, myProducts, makeRate }
+    const addToBuyList = async (req, res) => {
+        try {
+            const { user_id } = req;
+            const { product_id } = req.body;
+
+            const user = await User.find({ _id: user_id });
+            if (user.buy_list.includes(product_id)) throw Error('Produto ja na lista de compra');
+            user.buy_list.push(product_id);
+            await user.save();
+            return res.json({ "success": true });
+        } catch (error) {
+            console.log(error);
+            const { message } = error;
+            return res.status(500).send({ message });
+        }
+    }
+
+    const removeFromBuyList = async (req, res) => {
+        try {
+            const { user_id } = req;
+            const { market_id, value } = req.body;
+
+            const product = await user.findRating(user_id, market_id);
+            if (product) throw Error('Mercado ja avaliado.');
+
+            const products = await user.rating({ market: market_id, user: user_id, value });
+            return res.json(products);
+        } catch (error) {
+            console.log(error);
+            const { message } = error;
+            return res.status(500).send({ message });
+        }
+    }
+
+    const listBuyList = async (req, res) => {
+        try {
+            const { user_id } = req;
+            const { market_id, value } = req.body;
+
+            const product = await user.findRating(user_id, market_id);
+
+            if (product) throw Error('Mercado ja avaliado.');
+
+            const products = await user.rating({ market: market_id, user: user_id, value });
+            return res.json(products);
+        } catch (error) {
+            console.log(error);
+            const { message } = error;
+            return res.status(500).send({ message });
+        }
+    }
+
+    return { register, signIn, myProducts, makeRate, addToBuyList, removeFromBuyList, listBuyList }
 }

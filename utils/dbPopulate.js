@@ -5,10 +5,10 @@ module.exports = app => {
 
         const { user, products, markets } = getData();
 
-        const newUser = createUser(user);
+//        const newUser = createUser(user);
         const newMarkets = createMarkets(markets);
         const db_markets = await Market.find();
-        await Promise.all([newUser, newMarkets]);
+        await Promise.all([newMarkets]);
         await createProducts(db_markets, products);
 
         return true;
@@ -34,12 +34,14 @@ module.exports = app => {
         try {
             const mapped_products = db_markets.map((market, index) => {
                 const values = index % 2 === 0 ? [2, 4, 6] : [1, 3, 5];
-                const product = products.filter(product => values.includes(product.id));
+                const product = products.find(product => values.includes(product.id));
+                if (product == null) return null;
+
                 return {
                     market: market._id,
                     ...product
                 }
-            })
+            }).filter(e => e != null);
             return await Product.create(mapped_products);
         } catch (e) {
             console.log(e)
