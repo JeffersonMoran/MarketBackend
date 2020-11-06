@@ -32,12 +32,12 @@ module.exports = app => {
 
     const createProduct = async (req, res) => {
         try {
-            const { market_id } = req.params;
+            const { id } = req.params;
             const { user_id } = req;
             
-            const product_found = await listProducts({ market: market_id, nome: req.body.nome, descricao: req.body.descricao });
+            const product_found = await listProducts({ market: id, nome: req.body.nome, descricao: req.body.descricao });
             if (product_found.length > 0) throw Error('Produto ja cadastrao para esse mercado.');
-            const product = await addProduct({ market: market_id, created_by: user_id, ...req.body });
+            const product = await addProduct({ market: id, created_by: user_id, ...req.body });
             return res.json(product);
         } catch (error) {
             console.log(error);
