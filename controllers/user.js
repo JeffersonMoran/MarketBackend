@@ -61,7 +61,9 @@ module.exports = (app) => {
             const { user_id } = req;
             const { product_id } = req.body;
 
-            const user = await User.find({ _id: user_id });
+            const user = await User.findOne({ _id: user_id });
+
+            console.log(user);
             if (user.buy_list.includes(product_id)) throw Error('Produto ja na lista de compra');
             user.buy_list.push(product_id);
             await user.save();
@@ -76,13 +78,14 @@ module.exports = (app) => {
     const removeFromBuyList = async (req, res) => {
         try {
             const { user_id } = req;
-            const { market_id, value } = req.body;
-
-            const product = await user.findRating(user_id, market_id);
-            if (product) throw Error('Mercado ja avaliado.');
-
-            const products = await user.rating({ market: market_id, user: user_id, value });
-            return res.json(products);
+            const { id } = req.params;
+            
+            const user = await User.findOne({ _id: user_id });
+            if(!user.buy_list.includes(id.toString())) throw Error('Produto nao esta na lista de compra');
+        
+            user.buy_list = user.buy_list.filter(product => product != id);
+            await user.save();
+            return res.json({ "success": true });
         } catch (error) {
             console.log(error);
             const { message } = error;
@@ -93,14 +96,8 @@ module.exports = (app) => {
     const listBuyList = async (req, res) => {
         try {
             const { user_id } = req;
-            const { market_id, value } = req.body;
-
-            const product = await user.findRating(user_id, market_id);
-
-            if (product) throw Error('Mercado ja avaliado.');
-
-            const products = await user.rating({ market: market_id, user: user_id, value });
-            return res.json(products);
+            const user = await User.findOne({ _id: user_id }).populate('buy_list', '-__v');
+            res.json(user.buy_list)
         } catch (error) {
             console.log(error);
             const { message } = error;
