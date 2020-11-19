@@ -4,6 +4,8 @@ module.exports = (app) => {
     const { verifyJWT } = app.middlewares.authenticate;
 
     app.get('/markets/', verifyJWT, market.markets);
+
+    app.get('/products', verifyJWT, market.getProduts);
     app.get('/market/:id', verifyJWT, market.findOneMarket);
     app.post('/market/:id/product', verifyJWT, market.createProduct);
 }
